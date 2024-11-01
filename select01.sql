@@ -247,6 +247,10 @@ UNION 합집합 (중복제거)
 UNION ALL 합집합 (중복제거x)
 INTERSECT 교집합
 MINUS 차집합
+    조건(제약)
+        1. 컬럼 갯수 동일
+        2. 컬럼 데이터형 동일
+        3. 컬럼명은 상관없음
 
 --학생들 중에 101번학과 학생들과 102번 학과 학생들 조회
 select *
@@ -283,7 +287,37 @@ select
     deptno, 
     email --숫자 / 문자 / 숫자 / 문자 4개
 from professor;
+WHERE deptno = 101;
 
+select studno, name, deptno1, '학생' divtype --숫자 / 문자 / 숫자 3개
+from student
+WHERE deptno1 = 101
+UNION ALL
+select profno, name, deptno, '교수' --숫자 / 문자 / 숫자 3개
+from professor
+WHERE deptno = 101;
+
+
+
+select *
+from student
+where deptno1 = 101
+INTERSECT
+select *
+FROM student
+where deptno2 = 201;
+
+select *
+from student
+where deptno1 = 101 AND deptno2 = 201;
+
+select *
+from emp
+WHERE job = 'SALESMAN' AND COMM > 400
+MINUS
+select *
+from emp
+WHERE HIREDATE < '1982-01-01';
 
 
 
